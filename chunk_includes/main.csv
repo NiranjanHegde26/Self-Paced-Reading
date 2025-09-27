@@ -1,0 +1,5 @@
+SentenceID,sentence,question,answer,Type,ItemID
+1,I was very angry at you today but what can I do?,Was I angry at you?,Yes,D,IH+C2,1
+2,Someone was very angry at you today but what can I do?,,,IH+C2,2
+3,Simon was very angry at you today but what can fishing_rod do?,Was I angry at you?,No,K,C1+C2,3
+4,June was very angry at you today but what can I do?,,,C1+TE,4
