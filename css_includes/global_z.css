@@ -7,15 +7,20 @@
     margin-left: calc(50vw - 30em);
 }
 
+.end {
+    align-content: center;
+    justify-content: center;
+}
+
 .panel {
     width: 90%;
     margin: auto;
     background-color: #fff;
-    border: 1px solid transparent;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 
 .panel-primary {
+    border: 1px solid transparent;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     border-color: #337ab7;
 }
 
