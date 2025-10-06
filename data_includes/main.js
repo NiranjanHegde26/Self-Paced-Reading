@@ -1,10 +1,10 @@
 // Author: Niranjana Hegde BS 
-// Date: 27/09/2025
+// First Iteration Date: 27/09/2025
 //Inspired by https://chuprinko-kirill.github.io/pcibex_tutorial/sprt.html and https://pryslopska.com/projects/lab_crab/pcibex/questionnaire/
 
 PennController.ResetPrefix(null); // Shorten command names (keep this line here))
 DebugOff(); // Uncomment this line only when you are 100% done designing your experiment
-
+var showProgressBar = false;
 // First show instructions, then experiment trials, send results and show end screen
 Sequence(
   "counter",
@@ -148,23 +148,20 @@ Template("practice.csv", (row) =>
       .center()
       .print("center at 50vw", "middle at 40vh"),
     newKey("Enter").wait(),
-    getText("insSpace") 
-      .remove(),
+    
+    getText("insSpace").remove(),
+    
     newController("DashedSentence", {
       s: row.sentence,
       mode: "self-paced reading",
-      display: "in place",
-      blankText: "X",
       hideUnderscores: true,
     })
-      .center()
       .cssContainer({
         "font-family": "monospace",
         "font-size": "25px",
-        "padding-top": "50px",
+        "margin": "150px 30px 50px 30px"
       })
-      .print("center at 50vw", "middle at 40vh")
-      .log()
+      .print()
       .wait()
       .remove(),
 
@@ -188,13 +185,13 @@ Template("practice.csv", (row) =>
             newText("feedback", "Right Answer")
             .cssContainer({"font-size": "20px"})
               .color("green")
-              .print("center at 50vw", "middle at 30vh")
+              .print("center at 50vw", "middle at 25vh")
           )
           .failure(
             newText("feedback", "Wrong Answer")
             .cssContainer({"font-size": "20px"})
               .color("red")
-              .print("center at 50vw", "middle at 35vh")
+              .print("center at 50vw", "middle at 25vh")
           ),
         newTimer("pause", 1000) // Brief pause to see feedback
           .start()
@@ -229,7 +226,7 @@ PennController(
       "border-radius": "4px",
     })
     .bold()
-    .center()
+    .center("center at 50vw", "middle at 40vh")
     .print()
     .wait() 
 );
@@ -248,23 +245,20 @@ Template("main.csv", (row) =>
       .center()
       .print("center at 50vw", "middle at 40vh"),
     newKey("Enter").wait(),
-    getText("insSpace") // With get text, we can make modifications to prior elements. Here, removing it. We have to remove it here, because the same element contains multiple text elements that will appear at the same spot.
+    getText("insSpace") // With get text, we can make modifications to prior elements. Here, it is removed, because the same element contains multiple text elements that will appear at the same spot.
       .remove(),
 
     newController("DashedSentence", {
       s: row.sentence,
       mode: "self-paced reading",
-      display: "in place",
-      blankText: "X",
       hideUnderscores: true,
     })
-      .center()
       .cssContainer({
         "font-family": "monospace",
         "font-size": "25px",
-        "padding-top": "50px",
+        "margin": "150px 30px 50px 30px"
       })
-      .print("center at 50vw", "middle at 40vh")
+      .print()
       .log()
       .wait()
       .remove(),
@@ -280,6 +274,7 @@ Template("main.csv", (row) =>
           .css("font-size", "1.5em", "center")
           .center()
           .button()
+          .log()
           .keys("D", "K")
           .print("center at 50vw", "middle at 45vh")
           .wait(), 
@@ -301,13 +296,13 @@ Template("main.csv", (row) =>
       )
   )
     .log("SentenceID", row.SentenceID) // Or the column you want to retain
-    .log("SentenceID", row.SentenceID) // Or the column you want to retain
+    .log("ItemID", row.ItemID) // Or the column you want to retain
     .log("Type", row.Type) // Or the column you want to retain
 );
 
 PennController(
   "end",
-  newHtml("end", "end.html").center().print(), // this is required to actually display the content. Otherwise the element exists, but isn't visible
+  newHtml("end", "end.html").center().print(), // this is required to actually display the content. Otherwise, the element exists, but isn't visible
   newButton("<a href='https://google.com'>Next</a>")
     .css({
       "margin-top": "20px",
@@ -335,6 +330,3 @@ PennController(
     .print()
     .wait() // wait() in general means that the element doesn't progress till a certain action is executed
 );
-
-
-
